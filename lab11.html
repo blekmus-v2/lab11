@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>90s Shopping List</title>
+    <style>
+      body {
+        font-family: "Courier New", Courier, monospace;
+        background-color: #000;
+        color: #00ff00;
+        padding: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-shadow: 2px 2px #ff00ff;
+      }
+
+      div {
+        margin-bottom: 20px;
+        border: 2px solid #00ff00;
+        padding: 10px;
+        background-color: #0a0a0a;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        background-color: #000;
+        border: 1px solid #00ff00;
+        color: #00ff00;
+        font-family: inherit;
+      }
+
+      button {
+        background-color: #00ff00;
+        color: #000;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #ff00ff;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 10px;
+        border: 1px solid #00ff00;
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      li button {
+        font-size: 12px;
+        background-color: #ff00ff;
+      }
+
+      li button:hover {
+        background-color: #00ff00;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My 90s Shopping List</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item" />
+      <button>Add item</button>
+    </div>
+
+    <ul></ul>
+
+    <script>
+      // Get references to the elements
+      const list = document.querySelector("ul");
+      const input = document.querySelector("#item");
+      const button = document.querySelector("button");
+
+      // Function to run when the button is clicked
+      function addItem() {
+        const itemText = input.value;
+        if (itemText !== "") {
+          const listItem = document.createElement("li");
+          const span = document.createElement("span");
+          const deleteButton = document.createElement("button");
+
+          // Set the text content of the span and the button
+          span.textContent = itemText;
+          deleteButton.textContent = "Delete";
+
+          // Append the span and the button as children of the list item
+          listItem.appendChild(span);
+          listItem.appendChild(deleteButton);
+
+          // Append the list item as a child of the list
+          list.appendChild(listItem);
+
+          // Clear the input field
+          input.value = "";
+
+          // Attach an event handler to the delete button
+          deleteButton.addEventListener("click", function () {
+            list.removeChild(listItem);
+          });
+
+          // Focus the input element
+          input.focus();
+        }
+      }
+
+      // Add event listener to the button
+      button.addEventListener("click", addItem);
+
+      // Add event listener for the Enter key
+      input.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          addItem();
+        }
+      });
+    </script>
+  </body>
+</html>
